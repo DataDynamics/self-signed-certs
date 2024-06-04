@@ -9,9 +9,11 @@ set -e
 #set -x
 
 # certification domain
-CA_DOMAIN=ca.aa
+CA_DOMAIN=cm.pvs.datalake.net
+
 # cert validity in days (20 years)
 DAYS=7320
+
 # base directory
 DIR="."
 
@@ -103,17 +105,17 @@ x509_extensions     = v3_ca
 
 [ req_distinguished_name ]
 # Country Name (2 letter code)
-C = AA
+C = KR
 # State or Province Name
-ST = Andromeda
+ST = Gyeonggi-do
 # Locality Name
-L = Island
+L = Yongin-si
 # Organization Name
-O = AA Certification
+O = Data Dynamics
 # Organizational Unit Name
-OU = Certification Unit
+OU = Data Dynamics
 # Common Name
-CN = AA Certification
+CN = cm.pvc.datalake.net
 # Email Address
 emailAddress = info@$CA_DOMAIN
 
@@ -134,12 +136,15 @@ EOS
 openssl rand -base64 100 > "$RANDFILE"
 
 # generate password
-openssl rand -base64 100 | tr -dc "[:print:]" | head -c 80 > "$ROOT_PASS"
+#openssl rand -base64 100 | tr -dc "[:print:]" | head -c 80 > "$ROOT_PASS"
+echo "Dd98969321$9" > $ROOT_PASS
 
 # generate key
 openssl genrsa -aes256 \
   -passout "file:$ROOT_PASS" \
   -out "$ROOT_KEY" 4096
+
+echo "Key file '$ROOT_KEY' generated"
 
 # create certificate
 openssl req -x509 \
@@ -150,5 +155,8 @@ openssl req -x509 \
   -key "$ROOT_KEY" \
   -out "$ROOT_CRT"
 
+echo "Certificate file '$ROOT_CRT' generated"
+
 # show certificate
+echo "Displaying '$ROOT_CRT'...."
 openssl x509 -text -noout -in "$ROOT_CRT"
