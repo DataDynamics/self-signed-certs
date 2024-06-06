@@ -33,7 +33,7 @@ done
 
 if [ ${#DNS[@]} -eq 0 ]; then
   # use default list
-  DNS=("*.pvc.datalake.net" "pvc.datalake.net" "*.local" "localhost")
+  DNS=("*.apps.pvc.datalake.net apps.pvc.datalake.net *.pvc.datalake.net" "pvc.datalake.net" "*.local" "localhost")
 else 
   CN="${DNS[0]}"
   NAME=$(echo ${DNS[0]} | sed -e "s/^\*\./star./")
