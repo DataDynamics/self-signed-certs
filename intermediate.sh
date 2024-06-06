@@ -90,18 +90,17 @@ distinguished_name  = req_distinguished_name
 x509_extensions     = v3_intermediate_ca
 
 [ req_distinguished_name ]
-# Country Name (2 letter code)
-C = AA
+C = KR
 # State or Province Name
-ST = Andromeda
+ST = Gyeonggi-do
 # Locality Name
-L = Island
+L = Yongin-si
 # Organization Name
-O = AA Certification
+O = Data Dynamics
 # Organizational Unit Name
 OU = Certification Unit
 # Common Name
-CN = AA Certification Intermediate
+CN = Data Dynamics Certification Intermediate
 # Email Address
 emailAddress = info@$CA_DOMAIN
 
@@ -131,7 +130,8 @@ test ! -f "$ROOT_CRT" && ./root_ca.sh
 test -f "$KEY" && rm "$PASS" "$KEY" "$CSR" "$CRT"
 
 # generate password
-openssl rand -base64 100 | tr -dc "[:print:]" | head -c 80 > "$PASS"
+# openssl rand -base64 100 | tr -dc "[:print:]" | head -c 80 > "$PASS"
+PASS = "Dd98969321$9"
 
 # generate key
 openssl genrsa -aes256 \
