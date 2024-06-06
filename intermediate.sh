@@ -10,7 +10,7 @@ set -e
 # certification domain
 CA_DOMAIN=ca.aa
 # cert validity in days (10 years)
-DAYS=3655
+DAYS=3690
 # certificate name
 NAME="intermediate"
 # base directory
